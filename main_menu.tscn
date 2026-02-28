@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dfutqvx80yfy1"]
+
+[ext_resource type="Script" uid="uid://b0hcrwvbki3dp" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="PackedScene" uid="uid://dnybocqsi3s7q" path="res://main.tscn" id="2_7vrkn"]
+
+[node name="MainMenu" type="Control" unique_id=1640226468]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+game_scene = ExtResource("2_7vrkn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=770211604]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 332.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1780261874]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1590466274]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=1762560995]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1389465646]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Beneath the Surface"
+
+[node name="StartButton" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=61805669]
+layout_mode = 2
+text = "Start"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=206183801]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1321512713]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1074486598]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "                  Quit                  "
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=529567317]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=1476813369]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=528761882]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=857304479]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

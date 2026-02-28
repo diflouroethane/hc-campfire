@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bkiv5w4016ima"]
+
+[node name="HealthSpawner" type="Node2D" unique_id=80632584]

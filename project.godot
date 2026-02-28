@@ -11,16 +11,24 @@ config_version=5
 [application]
 
 config/name="beneath the surface"
-run/main_scene="uid://dnybocqsi3s7q"
+run/main_scene="uid://dfutqvx80yfy1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://cfxb0ik40elq"
+
 [display]
 
-window/size/viewport_width=576
-window/size/viewport_height=339
+window/size/viewport_width=578
+window/size/viewport_height=332
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[global_group]
+
+enemy=""
 
 [input]
 

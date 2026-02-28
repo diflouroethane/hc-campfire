@@ -2,20 +2,35 @@
 
 [ext_resource type="Script" uid="uid://csbanhgt0xcqu" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://c160xvv00lhw8" path="res://assets/raw/player/player.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://lbpvq0qn1exu" path="res://assets/raw/player/attack1.png" id="2_n7ghd"]
 [ext_resource type="Texture2D" uid="uid://dd3elo1afqw11" path="res://assets/raw/player/burrowing1.png" id="3_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://4oxwmw6wf1mp" path="res://assets/raw/player/attack2.png" id="3_nvl01"]
 [ext_resource type="Texture2D" uid="uid://cswy1cdny47y5" path="res://assets/raw/player/burrowing2.png" id="4_dw050"]
+[ext_resource type="Texture2D" uid="uid://31v7j5cnjjiu" path="res://assets/raw/player/attack3.png" id="4_ivps1"]
 [ext_resource type="Texture2D" uid="uid://c0mx2wviq0n4n" path="res://assets/raw/player/burrowing3.png" id="5_b26j0"]
+[ext_resource type="Texture2D" uid="uid://dc6yrl6sq50w2" path="res://assets/raw/player/attack4.png" id="5_urp6f"]
 [ext_resource type="Texture2D" uid="uid://c1b53ruemdu64" path="res://assets/raw/player/burrowing4.png" id="6_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://bcyn3bynp14ik" path="res://assets/raw/player/walk1.png" id="10_nvl01"]
+[ext_resource type="Texture2D" uid="uid://mec7igvilp6a" path="res://assets/raw/player/walk2.png" id="11_ivps1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onrkg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_i3pqv")
+"texture": ExtResource("2_n7ghd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nvl01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ivps1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_urp6f")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -40,25 +55,65 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 7.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_nvl01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ivps1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
-size = Vector2(64, 64)
+size = Vector2(32, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urp6f"]
+size = Vector2(52, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivps1"]
+size = Vector2(52, 50)
 
 [node name="Player" type="CharacterBody2D" unique_id=1970900424]
+collision_mask = 2
 script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1752568017]
+position = Vector2(0, 2.9802322e-08)
 sprite_frames = SubResource("SpriteFrames_onrkg")
-animation = &"burrow"
-frame_progress = 0.12619787
+animation = &"attack"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=338744223]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_sh265")
 
+[node name="ShapeColl" type="Area2D" parent="." unique_id=316422264]
+
+[node name="CollisionShapeRight" type="CollisionShape2D" parent="ShapeColl" unique_id=299397120]
+position = Vector2(10, 7)
+shape = SubResource("RectangleShape2D_urp6f")
+disabled = true
+
+[node name="CollisionShapeLeft" type="CollisionShape2D" parent="ShapeColl" unique_id=1020350371]
+position = Vector2(-10, 7)
+shape = SubResource("RectangleShape2D_ivps1")
+disabled = true
+
 [node name="BurrowTimer" type="Timer" parent="." unique_id=1091450926]
-wait_time = 3.0
+wait_time = 0.5
 one_shot = true
 
+[node name="HurtTimer" type="Timer" parent="." unique_id=598546182]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="ShapeColl" to="." method="_on_shape_coll_body_entered"]
 [connection signal="timeout" from="BurrowTimer" to="." method="_on_burrow_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

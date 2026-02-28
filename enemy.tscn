@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bd3exg7qawrfn"]
 
+[ext_resource type="Script" uid="uid://cd6ban2oetrn3" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://c0p1bgru2ka8e" path="res://assets/raw/enemy/enemy.png" id="1_7k104"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7xaro"]
@@ -14,12 +15,48 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xaro"]
-size = Vector2(64, 64)
+size = Vector2(16, 25)
 
-[node name="Enemy" type="Area2D" unique_id=2115371771]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(16, 25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
+radius = 2.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1665762020 groups=["enemy"]]
+collision_mask = 2
+script = ExtResource("1_4gyqm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1908090714]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_7xaro")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=12829429]
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_7xaro")
+
+[node name="Coll" type="Area2D" parent="." unique_id=520823508]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coll" unique_id=253284850]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="ShapeCastRight" type="ShapeCast2D" parent="." unique_id=782234783]
+position = Vector2(8, -6)
+shape = SubResource("CircleShape2D_4gyqm")
+target_position = Vector2(0, 19)
+collision_mask = 2
+
+[node name="ShapeCastLeft" type="ShapeCast2D" parent="." unique_id=111015057]
+position = Vector2(-8, -6)
+shape = SubResource("CircleShape2D_4gyqm")
+target_position = Vector2(0, 19)
+collision_mask = 2
+
+[node name="RecoilTimer" type="Timer" parent="." unique_id=2069141233]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="body_entered" from="Coll" to="." method="_on_coll_body_entered"]
+[connection signal="body_exited" from="Coll" to="." method="_on_coll_body_exited"]
+[connection signal="timeout" from="RecoilTimer" to="." method="_on_recoil_timer_timeout"]

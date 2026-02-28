@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bh5so3vkilkog"]
+
+[ext_resource type="Script" uid="uid://b0v4vcyhxvcnj" path="res://health_pickup.gd" id="1_16jou"]
+[ext_resource type="Texture2D" uid="uid://ckfmnkpvanbjt" path="res://assets/raw/health-pickup/health-pickup1.png" id="1_ssuja"]
+[ext_resource type="Texture2D" uid="uid://dok6ls4vdi8a5" path="res://assets/raw/health-pickup/health-pickup2.png" id="2_16jou"]
+[ext_resource type="Texture2D" uid="uid://08njyqv582k8" path="res://assets/raw/health-pickup/health-pickup3.png" id="3_6dxyd"]
+[ext_resource type="Texture2D" uid="uid://6ktdd13l7c8k" path="res://assets/raw/health-pickup/health-pickup4.png" id="4_o315m"]
+[ext_resource type="Texture2D" uid="uid://dbtm8xlosxesa" path="res://assets/raw/health-pickup/health-pickup5.png" id="5_5bnq4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wkcxt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ssuja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_16jou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6dxyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o315m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5bnq4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01648"]
+size = Vector2(32, 32)
+
+[node name="HealthPickup" type="Area2D" unique_id=870262462]
+script = ExtResource("1_16jou")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1622152610]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_wkcxt")
+frame_progress = 0.91816247
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=172073305]
+shape = SubResource("RectangleShape2D_01648")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
