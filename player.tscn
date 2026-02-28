@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bwgeop3npd4td"]
+
+[ext_resource type="Script" uid="uid://csbanhgt0xcqu" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://c160xvv00lhw8" path="res://assets/raw/player/player.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://dd3elo1afqw11" path="res://assets/raw/player/burrowing1.png" id="3_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://cswy1cdny47y5" path="res://assets/raw/player/burrowing2.png" id="4_dw050"]
+[ext_resource type="Texture2D" uid="uid://c0mx2wviq0n4n" path="res://assets/raw/player/burrowing3.png" id="5_b26j0"]
+[ext_resource type="Texture2D" uid="uid://c1b53ruemdu64" path="res://assets/raw/player/burrowing4.png" id="6_n7ghd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onrkg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1jxqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dw050")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b26j0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n7ghd")
+}],
+"loop": true,
+"name": &"burrow",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
+size = Vector2(64, 64)
+
+[node name="Player" type="CharacterBody2D" unique_id=1970900424]
+script = ExtResource("1_onrkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1752568017]
+sprite_frames = SubResource("SpriteFrames_onrkg")
+animation = &"burrow"
+frame_progress = 0.12619787
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=338744223]
+shape = SubResource("RectangleShape2D_sh265")
+
+[node name="BurrowTimer" type="Timer" parent="." unique_id=1091450926]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="BurrowTimer" to="." method="_on_burrow_timer_timeout"]
