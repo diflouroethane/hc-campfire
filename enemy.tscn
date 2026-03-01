@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://bd3exg7qawrfn"]
 
 [ext_resource type="Script" uid="uid://cd6ban2oetrn3" path="res://enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://c0p1bgru2ka8e" path="res://assets/raw/enemy/enemy.png" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://srdd2tdbrtnp" path="res://assets/raw/enemy/enemy1.png" id="2_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://cv7fnu2x7hm0c" path="res://assets/raw/enemy/enemy2.png" id="3_iifgy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7xaro"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_7k104")
+"texture": ExtResource("2_qi2p4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iifgy")
 }],
 "loop": true,
 "name": &"default",
@@ -15,10 +19,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xaro"]
-size = Vector2(16, 25)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(16, 25)
+size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
 radius = 2.0
@@ -32,13 +36,13 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_7xaro")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=12829429]
-position = Vector2(0, 3.5)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_7xaro")
 
 [node name="Coll" type="Area2D" parent="." unique_id=520823508]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Coll" unique_id=253284850]
-position = Vector2(0, 3.5)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="ShapeCastRight" type="ShapeCast2D" parent="." unique_id=782234783]

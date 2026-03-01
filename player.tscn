@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c1b53ruemdu64" path="res://assets/raw/player/burrowing4.png" id="6_n7ghd"]
 [ext_resource type="Texture2D" uid="uid://bcyn3bynp14ik" path="res://assets/raw/player/walk1.png" id="10_nvl01"]
 [ext_resource type="Texture2D" uid="uid://mec7igvilp6a" path="res://assets/raw/player/walk2.png" id="11_ivps1"]
+[ext_resource type="AudioStream" uid="uid://ocvsj2tmy50e" path="res://slap.mp3" id="13_urp6f"]
+[ext_resource type="AudioStream" uid="uid://gfut4cd1blkg" path="res://digdigdig.mp3" id="14_bwjto"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onrkg"]
 animations = [{
@@ -110,8 +112,30 @@ wait_time = 0.5
 one_shot = true
 
 [node name="HurtTimer" type="Timer" parent="." unique_id=598546182]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1511068935]
+position = Vector2(0, 32)
+emitting = false
+amount = 34
+lifetime = 0.75
+speed_scale = 2.9
+direction = Vector2(0, -1)
+gravity = Vector2(0, -19.8)
+initial_velocity_max = 0.5
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_max = 3.0
+color = Color(0.44843918, 0.39750916, 0.31322193, 1)
+
+[node name="SlapSound" type="AudioStreamPlayer2D" parent="." unique_id=1470939002]
+stream = ExtResource("13_urp6f")
+volume_db = 5.0
+
+[node name="DigSound" type="AudioStreamPlayer2D" parent="." unique_id=591154085]
+stream = ExtResource("14_bwjto")
+volume_db = 5.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="ShapeColl" to="." method="_on_shape_coll_body_entered"]

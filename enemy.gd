@@ -7,13 +7,27 @@ var SPEED = 150.0
 var p_inside = 0
 var player
 var health: int = 2
+var dir = "left"
+
+func _ready() -> void:
+	$AnimatedSprite2D.play("default")
 
 func _physics_process(delta: float) -> void:
-	if $ShapeCastLeft.is_colliding() or $ShapeCastRight.is_colliding():
-		rotation += deg_to_rad(180)
+	if dir == "left":
+		if $ShapeCastRight.is_colliding():
+			animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
+			dir = "right"
+	else:
+		if $ShapeCastLeft.is_colliding():
+			animated_sprite_2d.flip_h = !animated_sprite_2d.flip_h
+			dir = "left"
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	velocity.x = transform.x.x * SPEED
+	if dir == "left":
+		velocity.x = SPEED
+	else:
+		velocity.x = -SPEED
 	if p_inside >= 1:
 		print("hurt player")
 		player.hurt()

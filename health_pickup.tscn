@@ -34,12 +34,13 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="HealthPickup" type="Area2D" unique_id=870262462]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_16jou")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1622152610]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_wkcxt")
-frame_progress = 0.91816247
+frame_progress = 0.36621308
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=172073305]
 shape = SubResource("RectangleShape2D_01648")

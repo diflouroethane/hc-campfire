@@ -23,25 +23,30 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		stop_burrow()
 	#print(is_attacking)
 	if is_under:
 		_animated_sprite_2d.play("burrow")
+		if !$DigSound.playing:
+			$DigSound.play()
 	#elif !is_attacking:
 		#_animated_sprite_2d.play("default")
 		
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor() and !is_under:
 		velocity.y = JUMP_VELOCITY
+	elif Input.is_action_just_pressed("jump") and is_under:
+		stop_burrow()
 		
 	if Input.is_action_just_pressed("burrow") and is_on_floor():
 		if !is_under:
+			$CPUParticles2D.emitting = true
 			$BurrowTimer.start()
 			_animated_sprite_2d.play("burrow")
 			is_under = true
-		elif !is_attacking:
-			is_attacking = false
-			if !$BurrowTimer.is_stopped(): $BurrowTimer.stop()
-			is_under = false
+		else: #if !is_attacking:
+			#is_attacking = false
+			stop_burrow()
 			
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -65,16 +70,17 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	if Input.is_action_just_pressed("attack"):
-		#if !is_attacking:
-		_animated_sprite_2d.play("attack")
-		is_attacking = true
-		if dir == "left":
-			$ShapeColl/CollisionShapeLeft.disabled = false
-			$ShapeColl/CollisionShapeRight.disabled = true
-		else:
-			$ShapeColl/CollisionShapeLeft.disabled = true
-			$ShapeColl/CollisionShapeRight.disabled = false
-		
+		$SlapSound.play()
+		if !is_under:
+			_animated_sprite_2d.play("attack")
+			is_attacking = true
+			if dir == "left":
+				$ShapeColl/CollisionShapeLeft.disabled = false
+				$ShapeColl/CollisionShapeRight.disabled = true
+			else:
+				$ShapeColl/CollisionShapeLeft.disabled = true
+				$ShapeColl/CollisionShapeRight.disabled = false
+			
 		
 		
 	if !is_on_floor():
@@ -90,17 +96,19 @@ func hurt(amt = 1):
 	if damageable:
 		health -= amt
 		$HurtTimer.start()
-		print("damageable no mpore")
+		print("damageable no more")
 		damageable = false
 	
 	if health <= 0:
 		game_over.emit()
+		queue_free()
 
 func _on_burrow_timer_timeout() -> void:
 	print("kicking player out of burrow")
-	if is_under:
-		is_under = false
-		_animated_sprite_2d.play("walk")
+	#if is_under:
+		#$CPUParticles2D.emitting = false
+		#is_under = false
+		#_animated_sprite_2d.play("walk")
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
@@ -116,6 +124,11 @@ func _on_shape_coll_body_entered(body: Node2D) -> void:
 		print("hit enemy!!")
 		body.hurt()
 
+func stop_burrow():
+	$DigSound.stop()
+	if !$BurrowTimer.is_stopped(): $BurrowTimer.stop()
+	is_under = false
+	$CPUParticles2D.emitting = false
 
 func _on_hurt_timer_timeout() -> void:
 	damageable = true

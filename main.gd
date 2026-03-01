@@ -4,10 +4,11 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HealthSpawnTimer.start()
+	$GameOver.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_health_spawn_timer_timeout() -> void:
@@ -22,4 +23,6 @@ func _on_health_spawn_timer_timeout() -> void:
 
 
 func _on_player_game_over() -> void:
-	pass # Replace with function body.
+	$SadTrombone.play()
+	$GameOver.show()
+	#get_tree().paused = true
