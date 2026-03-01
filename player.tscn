@@ -108,7 +108,7 @@ shape = SubResource("RectangleShape2D_ivps1")
 disabled = true
 
 [node name="BurrowTimer" type="Timer" parent="." unique_id=1091450926]
-wait_time = 0.5
+wait_time = 3.0
 one_shot = true
 
 [node name="HurtTimer" type="Timer" parent="." unique_id=598546182]

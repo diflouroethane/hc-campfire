@@ -7,7 +7,7 @@ const BURROW_SPEED: float = 250.0
 const JUMP_VELOCITY: float = -300.0
 var is_attacking: bool = false
 var is_under: bool = false
-var maxHealth: int = 10
+var maxHealth: int = 6
 var health: int = maxHealth
 var dir = "left"
 var damageable: bool = true
@@ -105,6 +105,7 @@ func hurt(amt = 1):
 
 func _on_burrow_timer_timeout() -> void:
 	print("kicking player out of burrow")
+	stop_burrow()
 	#if is_under:
 		#$CPUParticles2D.emitting = false
 		#is_under = false

@@ -1,8 +1,10 @@
 extends Node2D
 
+class_name EnemySpawner
+
 @export var toSpawn: PackedScene
 @export var dir: directions
-@export_range(0.0, 100.0) var time_to_wait: float = 3.0
+@export_range(0.0, 100.0) var time_to_wait: float = 1.75
 enum directions {LEFT, RIGHT}
 
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +12,7 @@ func _ready() -> void:
 	if time_to_wait == 0:
 		$Timer.queue_free()
 	else:
-		$Timer.wait_time = time_to_wait if time_to_wait > 0 else 1
+		$Timer.wait_time = time_to_wait if time_to_wait > 0 else 1.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
