@@ -8,11 +8,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	var enemy_spawners = $EnemySpawners.get_children()
-	#for i in enemy_spawners:
-		#print(i.time_to_wait)
-		#i.time_to_wait -= 0.0005 if i.time_to_wait >= 0.0001 else 0
+#func _process(_delta: float) -> void:
+	#var enemy_spawners = $EnemySpawners.get_children()
+	##for i in enemy_spawners:
+		##print(i.time_to_wait)
+		##i.time_to_wait -= 0.0005 if i.time_to_wait >= 0.0001 else 0
 
 func _on_health_spawn_timer_timeout() -> void:
 	var possible_locs: Array[Node] = $HealthSpawners.get_children()

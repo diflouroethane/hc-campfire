@@ -15,9 +15,6 @@ func _ready() -> void:
 		$Timer.wait_time = time_to_wait if time_to_wait > 0 else 1.0
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_timer_timeout() -> void:

@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bcyn3bynp14ik" path="res://assets/raw/player/walk1.png" id="10_nvl01"]
 [ext_resource type="Texture2D" uid="uid://mec7igvilp6a" path="res://assets/raw/player/walk2.png" id="11_ivps1"]
 [ext_resource type="AudioStream" uid="uid://ocvsj2tmy50e" path="res://slap.mp3" id="13_urp6f"]
+[ext_resource type="AudioStream" uid="uid://nvtnk03s4ysk" path="res://ow.mp3" id="14_606se"]
 [ext_resource type="AudioStream" uid="uid://gfut4cd1blkg" path="res://digdigdig.mp3" id="14_bwjto"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onrkg"]
@@ -131,6 +132,10 @@ color = Color(0.44843918, 0.39750916, 0.31322193, 1)
 
 [node name="SlapSound" type="AudioStreamPlayer2D" parent="." unique_id=1470939002]
 stream = ExtResource("13_urp6f")
+volume_db = 5.0
+
+[node name="OwSound" type="AudioStreamPlayer2D" parent="." unique_id=1365236910]
+stream = ExtResource("14_606se")
 volume_db = 5.0
 
 [node name="DigSound" type="AudioStreamPlayer2D" parent="." unique_id=591154085]

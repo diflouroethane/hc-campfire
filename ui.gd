@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Control/HBoxContainer/VBoxContainer/HealthLabel.text = "health: " + str(Global.playerHealth)
 	$Control/HBoxContainer/VBoxContainer2/Scorelabel.text = "score: " + str(Global.score)
 	$Control/HBoxContainer/VBoxContainer/ProgressBar.max_value = Global.playerBurrowTime

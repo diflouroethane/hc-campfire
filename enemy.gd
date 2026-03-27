@@ -51,7 +51,7 @@ func _on_coll_body_entered(body: Node2D) -> void:
 		else:
 			print("burrowing")
 
-func hurt(amt=1):
+func hurt(_amt=1):
 	SPEED = -SPEED
 	$RecoilTimer.start()
 	health -= 1

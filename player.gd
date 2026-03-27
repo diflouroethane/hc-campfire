@@ -94,6 +94,7 @@ func set_globals() -> void:
 
 func hurt(amt = 1):
 	if damageable:
+		$OwSound.play()
 		health -= amt
 		$HurtTimer.start()
 		print("damageable no more")
