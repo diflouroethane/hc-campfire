@@ -60,6 +60,7 @@ down, d, c, k - burrow beneath the surface
 up, w, spacebar - jump
 
 x or j - attack
+
 beat the enemies fast or they'll fill up the bottom, quickly killing you!"
 vertical_alignment = 1
 autowrap_mode = 2
